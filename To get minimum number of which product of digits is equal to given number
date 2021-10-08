@@ -28,3 +28,10 @@ def f(n):
                 return "Not Possible"
         return(sorted(li)[0])
 print(f(n))
+
+
+#sample input output
+#input 10 --> Output 25 (2*5=10)
+#input 56 --> Output 78 (7*8=56)
+#input 288 -->Output 489(4*8*9=288)
+#input 124 -->Output "Not Possible" (as 124 = 4*31 but we need single digit factors only)
