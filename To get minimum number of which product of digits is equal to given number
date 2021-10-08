@@ -1,0 +1,30 @@
+n = int(input())
+
+def makenum(li):
+    li = sorted(li)
+    result = ""
+    for i in range(len(li)):
+        result+=str(li[i])
+    return int(result)
+def f(n):
+    if(n>=0 and n<10):#For case between 1 and 10 as if 7 is input ans = 17 coz 1*7 = 7 and we need minimum 2 digit answer
+        return n+10
+    # else we start checking factors from 9 (not from 2 ) as we need minimum number and check factor and divide number by the factor
+    #we do this for 9 to 2 and if after this the number is greater than 10 which implies that it is a prime so answer is "Not Possible"
+    else:
+        li=[]
+        for i in range(2,10):
+            temp = n
+            ans = []
+            for j in range(2,10):
+                while(temp%(11-j) == 0):
+                    ans.append((11-j))
+                    temp = int(temp/(11-j))
+            if(temp != 1):
+                ans.append(temp)
+            if(len(ans)>0 and ans[-1]<10):
+                li.append(makenum(ans))
+            else:
+                return "Not Possible"
+        return(sorted(li)[0])
+print(f(n))
