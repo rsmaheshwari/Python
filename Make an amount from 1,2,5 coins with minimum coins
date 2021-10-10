@@ -1,0 +1,13 @@
+n = int(input())
+five = 0
+two = 0
+one =0
+
+if((n-4)%5 == 0):
+    five = int((n-4)/5)
+if((n-(five*5))%2 == 0):
+    one = 2
+else:
+    one = 1
+two = int((n - one -5*five)/2)
+print("\nOne : ",one,"\nTwo:",two,"\nFive : ",five)
