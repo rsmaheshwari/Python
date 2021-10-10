@@ -1,0 +1,15 @@
+li = list(map(int,input().split()))
+def rob(li):
+    dp=[0]*len(li)
+    i=0
+    if(len(li) == 1):
+        return li[0]
+    elif(len(li) == 2):
+        return max(li[0],li[1])
+    else:
+        dp[0] = li[0]
+        dp[1] = max(li[0],li[1])
+        for i in range(2,len(li)):
+            dp[i] = max(li[i]+dp[i-2],dp[i-1])
+        return dp
+print(rob(li)[-1])
