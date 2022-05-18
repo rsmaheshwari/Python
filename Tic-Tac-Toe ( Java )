@@ -1,0 +1,119 @@
+import java.util.Scanner;
+public class test{
+	Scanner keyboard = new Scanner(System.in);
+	public void printBoard(String[][] board) {
+		for(int i =0;i<3;i++)
+		{
+			for(int j = 0;j<2;j++)
+			{
+				System.out.print(board[i][j]+" | ");
+			
+			}
+			System.out.print(" "+board[i][2]);
+		if(i<2)
+			System.out.println("\n----------");
+		}
+	}
+	public void startGame() {
+		String[][] board = new String[3][3];
+		
+		for(int i = 0;i<3;i++)
+		{
+			for(int j =0 ;j<3;j++)
+			{
+				board[i][j] = " ";
+			}
+		}
+		System.out.println("Who is going to start (x/0):");
+		String player1 = keyboard.nextLine();
+		String player2,chance;
+		if(player1.equals("x")||player1.equals("x"))
+			player2 = "0";
+		else
+			player2="x";
+		System.out.println("Player 1 : "+player1+"\nPlayer 2: "+player2);
+		chance = player1;
+		for(int i=0;i<9;i++)
+		{
+			takeInput(chance,board);
+			if(chance.equals(player1))
+				chance = player2;
+			else
+				chance = player1;
+			printBoard(board);
+			if(checkWinner(board,i))
+				break;
+		}
+		
+	}
+	public void takeInput(String player,String[][] board)
+	{
+		System.out.println("\nIt's "+player+"'s turn");
+		System.out.println("Please enter row and column (0-2) separated by space: ");
+		String [] box = (keyboard.nextLine()).split(" ");
+		int x = Integer.parseInt(box[0]);
+		int y = Integer.parseInt(box[1]);
+		isOccupied(player,board,x,y);
+		board[x][y] = player;	
+	}
+	public void isOccupied(String player,String[][] board,int x,int y)
+	{
+		if(board[x][y].equals("x")||board[x][y].equals("0"))
+		{
+			System.out.println("Cell is occupied!!");
+			takeInput(player,board);
+		}
+		
+	}
+	
+	public boolean checkWinner(String[][] board,int j) {
+		boolean flag = false;
+		for(int i =0 ;i<3;i++)
+		{
+			if(board[0][i].equals(board[1][i]) && board[1][i].equals(board[2][i]) && (board[0][i].equals("x") || board[0][i].equals("0")) )
+			{
+				System.out.println("The winner is "+board[0][i]);
+				flag = true;
+				break;
+			}
+			else if ( board[i][0].equals(board[i][1]) && board[i][1].equals(board[i][2]) && (board[i][0].equals("x") || board[i][0].equals("0")))
+			{
+				System.out.println("The winner is "+board[0][i]);
+				flag = true;
+				break;
+			}
+			else
+				continue;
+			
+		}
+		if(!flag)
+		{
+			if(board[0][0].equals(board[1][1]) && board[1][1].equals(board[2][2]) &&  (board[0][0].equals("x") || board[0][0].equals("0")))
+			{
+				System.out.println("The winner is "+board[0][0]);
+				flag = true;
+			}	
+			else if(board[0][2].equals(board[1][1]) && board[1][1].equals(board[2][0]) && (board[0][2].equals("x") || board[0][2].equals("0")))
+			{
+				System.out.println("The winner is "+board[1][1]);
+				flag = true;
+			}
+			else
+			{
+				if(j == 8)
+				{
+					System.out.println("Game Draw");
+					flag = true;
+				}
+			}
+		}
+		return flag;
+	}
+	
+	
+	public static void main(String[] args) {
+		test myGame = new test();
+		myGame.startGame();
+	
+	}
+}
